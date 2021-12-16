@@ -1,0 +1,213 @@
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--Stylesheet, Javasheet-->
+
+    <title>Document</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="gallery.html">Gallery</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link " href="card.html"> Business Card</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link active" href="todo.html">To Do</a>
+            </li>
+          </ul>
+
+          <!--  
+          <form class="d-flex">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </form>
+
+          -->
+        </div>
+      </div>
+    </nav>
+
+
+<div class = "container" style="margin-left:10px">
+
+
+    <h1>To-DO List</h1>
+    <!-- comment in html -->
+    <!--Forms→  registration/survey forms. Inside forms we will get user’s input-->
+
+    <button id = "task-button" class= "btn btn-success" style="margin-left:10px"> New Task</button>
+    <form style="display: none" class="container">
+      <div class ="form-group">
+      <label for="task">Task</label>
+      <input class ="form-control" type="text" id="task" />
+    </div>
+
+      <div class ="form-group">
+        <label for="progress">Progress</label>
+        <input class ="form-control" type="number" id="progress" />
+      </div>
+
+      <div class ="form-group">
+            <label for="description">Description</label>
+            <input class ="form-control" type="text" id="description" />
+      </div>
+      <!--you dont need label for submit button, looks like a button-->
+      <input type="submit" value="Submit" class="btn btn-primary " >
+    
+    
+    </form>
+
+  </div>
+    <!-- Unordered list -->
+    <ol>
+      <!-- list -->
+     <!-- // <li>
+        <div>
+          <h2>Task Name</h2>
+          <p>Task Description</p>
+          <p>Task Progress</p>
+        </div>
+      </li>
+
+      <li>
+        <div>
+          <h2>Task Name2</h2>
+          <p>Task Description2</p>
+          <p>Task Progress2</p>
+        </div>
+      </li>
+    </ol> -->
+
+    <script>
+      //command + "/" = Comment in Javascript
+      //JavaScript querying (searching)through the DOM tree
+      //Editing the DOM tree
+      //alert("hi");
+
+      //Events -> Scheduled
+      //   newBtn.onclick = // function
+      let newBtn = document.querySelector("#task-button");
+      newBtn.addEventListener("click", toggleBtn);
+
+
+
+      let form = document.querySelector("form")
+      form.addEventListener("submit", submitForm);
+
+      //event handlers
+      function submitForm(event) {
+        event.preventDefault();
+        let task = document.getElementById("task");
+        let progress = document.getElementById("progress");
+        let description = document.getElementById("description");
+        // 1. Validate -> it will return true or false
+        if (isValidate(task.value, progress.value, description.value)) {
+          // 2. Add to list of todos
+          addToDo(task.value, progress.value, description.value);
+          // 3. Clear the form
+          task.value = "";
+          progress.value = "";
+          description.value = "";
+        } else {
+          alert("Check your form");
+        }
+      }
+
+      // Add to do
+      function addToDo(task, progress, description) {
+        let wireframe = `
+      <li>
+        <div>
+          <h2>${task}</h2>
+          <p>Description : ${description}</p>
+          <p>Progress : ${progress}%</p>
+
+        </div>
+      </li>
+      `; //"" '' `` (` is your f-string in python)
+        let orderedList = document.querySelector("ol");
+
+        orderedList.innerHTML += wireframe;
+      }
+
+      function isValidate(task, progress, description) {
+        if (task == "" || progress == "" || description == "") {
+          return false;
+        }
+        if (+progress < 0 || +progress > 100) {
+          return false;
+        }
+        return true;
+      }
+
+      function toggleBtn() {
+        if (newBtn.innerText == "Close Task") {
+          newBtn.innerText = "New Task";
+          newBtn.className = "btn btn-success";
+          form.style.display = "none";
+        } else {
+          newBtn.innerText = "Close Task";
+          newBtn.className = "btn btn-secondary";
+          form.style.display = "block";
+          
+
+        }
+
+
+
+      }
+    </script>
+
+<script
+src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+crossorigin="anonymous"
+></script>
+<script
+src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+crossorigin="anonymous"
+></script>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+.flip-card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flip-card {
+  width: 300px;
+  height: 500px;
+  /* stylistic */
+  padding: 15px;
+  border: 1px solid#dadada;
+  border-radius: 10px;
+  /* Adding a drop shadow */
+  box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+  /* offset-x| offset-y| blur-radius |colour */
+}
+.flip-card-inner {
+  width: 100%;
+  height: 100%;
+  /* Duration of the animation  */
+  border-radius: 10px;
+  border: 10px green solid;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+}
+
+.flip-card-front,
+.flip-card-back {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  /* when the card is flipped, this side should be invisible */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* should be absolute to fix to slip-card-inner top left */
+  border: 5px red solid;
+  position: absolute;
+}
+.flip-card-front {
+  background-color: rgb(49, 63, 73);
+  /* to make the font side same size as the base */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flip-card-back {
+  background-color: white;
+  /* to rotate the card */
+  transform: rotateY(180deg);
+  /* for the content */
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  text-align: center;
+  transform: rotateY(180deg);
+}
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/*Image Sizing*/
+#logo-front {
+  filter: invert(100%);
+  width: 60%;
+}
+#logo-back {
+  width: 80%;
+  align-self: center;
+}
+#ted-lasso {
+  width: 60%;
+  border-radius: 50%;
+  align-self: center;
+  /* clip-path: circle(75px at center); */
+}
